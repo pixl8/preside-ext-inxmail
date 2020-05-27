@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form i18nBaseUri="email.serviceProvider.inxmail:">
+    <tab id="default">
+        <fieldset id="smtp">
+			<field name="inxmail_server"   control="textinput"   required="false" default="smtp.inxmail-commerce.com" />
+			<field name="inxmail_port"     control="spinner"     required="false" default="587" minvalue="1" maxValue="99999" />
+			<field name="inxmail_username" control="textinput"   required="false" />
+			<field name="inxmail_password" control="password"    required="false" outputSavedValue="true" />
+        </fieldset>
+
+        <fieldset id="api">
+            <field name="inxmail_api_key"    control="textinput" required="false" />
+            <field name="inxmail_api_secret" control="textinput" required="false" />
+        </fieldset>
+    </tab>
+</form>

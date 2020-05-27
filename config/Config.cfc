@@ -1,9 +1,8 @@
 component {
 
 	public void function configure( required struct config ) {
-		var conf     = arguments.config;
-		var settings = conf.settings ?: {};
+		var settings = arguments.config.settings ?: {};
 
-		// todo: your settings here
+		settings.email.serviceProviders.inxmail = {};
 	}
 }
