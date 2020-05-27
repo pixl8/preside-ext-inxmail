@@ -15,18 +15,7 @@ component {
 			, use_tls  = true
 		};
 
-		// TODO: add custom params for
-		// sendArgs.params = sendArgs.params ?: {};
-		// sendArgs.params[ "X-Mailgun-Variables" ] = {
-		// 	  name  = "X-Mailgun-Variables"
-		// 	, value =  SerializeJson( { presideMessageId = sendArgs.messageId ?: "" } )
-		// };
-		// if ( Len( Trim( template.name ?: "" ) ) ) {
-		// 	sendArgs.params[ "X-Mailgun-Tag" ] = {
-		// 		  name  = "X-Mailgun-Tag"
-		// 		, value =  template.name
-		// 	};
-		// }
+		_addInxHeaders( argumentCollection=arguments );
 
 		return runEvent(
 			  event          = "email.serviceProvider.smtp.send"
@@ -73,5 +62,24 @@ component {
 		}
 
 		return validationResult;
+	}
+
+// HELPERS
+	private void function _addInxHeaders( struct sendArgs={}, struct settings={} ) {
+		sendArgs.params = sendArgs.params ?: {};
+
+		if ( Len( Trim( arguments.settings.inxmail_appid ?: "" ) ) )  {
+			sendArgs.params[ "X-inx-correlationId1" ] = Trim( arguments.settings.inxmail_appid );
+		} else {
+			var appSettings = getApplicationMetadata();
+			sendArgs.params[ "X-inx-correlationId1" ] = appSettings.name ?: "Preside";
+		}
+
+		if ( Len( sendArgs.messageId ?: "" ) ) {
+			sendArgs.params[ "X-inx-correlationId2" ] = sendArgs.messageId;
+		}
+		if ( Len( Trim( template.name ?: "" ) ) ) {
+			sendArgs.params[ "X-inx-correlationId3" ] = Trim( template.name );
+		}
 	}
 }

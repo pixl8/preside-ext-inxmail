@@ -8,7 +8,9 @@
 			<field name="inxmail_password" control="password"    required="false" outputSavedValue="true" />
             <field name="inxmail_verify"   control="yesnoswitch" required="false" />
         </fieldset>
-
+        <fieldset id="inxmail">
+            <field name="inxmail_appid"    control="textinput"   required="false" />
+        </fieldset>
         <fieldset id="api">
             <field name="inxmail_api_key"    control="textinput" required="false" />
             <field name="inxmail_api_secret" control="textinput" required="false" />
