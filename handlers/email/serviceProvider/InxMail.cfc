@@ -75,11 +75,12 @@ component {
 			sendArgs.params[ "X-inx-correlationId1" ] = appSettings.name ?: "Preside";
 		}
 
-		if ( Len( sendArgs.messageId ?: "" ) ) {
-			sendArgs.params[ "X-inx-correlationId2" ] = sendArgs.messageId;
-		}
 		if ( Len( Trim( template.name ?: "" ) ) ) {
-			sendArgs.params[ "X-inx-correlationId3" ] = Trim( template.name );
+			sendArgs.params[ "X-inx-correlationId2" ] = Trim( template.name );
+		}
+
+		if ( Len( sendArgs.messageId ?: "" ) ) {
+			sendArgs.params[ "X-inx-correlationId3" ] = sendArgs.messageId;
 		}
 	}
 }
