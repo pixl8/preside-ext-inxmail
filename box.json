@@ -1,5 +1,5 @@
 {
-    "name":"PresideCMS Extension: INXMail SMTP Provider",
+    "name":"PresideCMS Extension: InxMail SMTP Provider",
     "type":"preside-extensions",
     "version":"VERSION_NUMBER",
     "location":"https://s3.eu-west-2.amazonaws.com/pixl8-public-packages/inxmail/DOWNLOAD_LOCATION",

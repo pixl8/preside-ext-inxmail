@@ -54,7 +54,7 @@ component {
 			var parsed = DeserializeJson( result.fileContent );
 
 			if ( Len( Trim( parsed.error ?: "" ) ) ) {
-				var msg = parsed.error & ": " & ( parsed.message ?: "An unexpected from the INXMail server. See error detail for detailed response" );
+				var msg = parsed.error & ": " & ( parsed.message ?: "An unexpected from the InxMail server. See error detail for detailed response" );
 				var code = Val( parsed.status ?: "" );
 
 				throw( msg, "inxmail.response.error", result.fileContent, code );
@@ -63,7 +63,7 @@ component {
 			return parsed;
 		}
 
-		throw( "An unexpected response was returned from the INXMail server. See error detail for detailed response.", "inxmail.response.error", SerializeJson( result ) );
+		throw( "An unexpected response was returned from the InxMail server. See error detail for detailed response.", "inxmail.response.error", SerializeJson( result ) );
 	}
 
 }

@@ -19,7 +19,7 @@ if [[ $TRAVIS_TAG == v* ]] || [[ $TRAVIS_BRANCH == release* ]] ; then
 
 	ZIP_FILE=$VERSION_NUMBER.zip
 
-	echo "Building Preside Extension: INXMail"
+	echo "Building Preside Extension: InxMail"
 	echo "==================================="
 	echo "GIT Branch      : $GIT_BRANCH"
 	echo "Version number  : $VERSION_NUMBER"

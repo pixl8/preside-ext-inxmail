@@ -3,11 +3,11 @@ component {
 	property name="inxMailEventSyncService" inject="inxMailEventSyncService";
 
 	/**
-	 * Sync INXMail bounces and complaints
+	 * Sync InxMail bounces and complaints
 	 *
 	 * @priority     5
 	 * @schedule     0 *\/5 * * * *
-	 * @displayName  Sync INXMail bounces and complaints
+	 * @displayName  Sync InxMail bounces and complaints
 	 * @displayGroup Email
 	 */
 	private boolean function syncInxMailDeliveryNotifications( logger ) {
