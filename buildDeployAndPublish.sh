@@ -48,8 +48,8 @@ if [[ $TRAVIS_TAG == v* ]] || [[ $TRAVIS_BRANCH == release* ]] ; then
     cd $BUILD_DIR;
     CWD="`pwd`";
 
-    box forgebox login username="$FORGEBOXUSER" password="$FORGEBOXPASS";
-    box publish directory="$CWD";
+    box forgebox login username="$FORGEBOXUSER" password="$FORGEBOXPASS" || exit 1;
+    box publish directory="$CWD" || exit 1;
 else
 	echo "Not publishing. This is not a tagged release.";
 fi
