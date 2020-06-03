@@ -71,10 +71,10 @@ component {
 		if ( IsDate( lastSuccess ) ) {
 			params.begin = lastSuccess;
 			if ( canInfo ) {
-				arguments.logger.info( "Syncing INXMail #eventType# events since [#lastSuccess#]..." );
+				arguments.logger.info( "Syncing InxMail #eventType# events since [#lastSuccess#]..." );
 			}
 		} else if ( canInfo ) {
-			arguments.logger.info( "Syncing INXMail #eventType# events since the beginning of time..." );
+			arguments.logger.info( "Syncing InxMail #eventType# events since the beginning of time..." );
 		}
 
 		do {
@@ -86,7 +86,7 @@ component {
 			reactionCount = ArrayLen( reactions );
 			if ( canInfo ) {
 				if ( reactionCount ) {
-					arguments.logger.info( "Fetched [#reactionCount#] #eventType# records from INXMail, recording in Preside now..." );
+					arguments.logger.info( "Fetched [#reactionCount#] #eventType# records from InxMail, recording in Preside now..." );
 				} else if ( params.page == 0 ) {
 					arguments.logger.info( "No #eventType# events to record." );
 				}
@@ -106,7 +106,7 @@ component {
 		} while( ++params.page <= Val( result.page.totalPages ?: "" ) );
 
 		if ( canInfo ) {
-			arguments.logger.info( "Finished syncing INXMail #eventType# events" );
+			arguments.logger.info( "Finished syncing InxMail #eventType# events" );
 		}
 	}
 
@@ -139,7 +139,7 @@ component {
 		for( var field in requiredFields ) {
 			if ( !Len( Trim( settings[ field ] ?: "" ) ) ) {
 				if ( !IsNull( arguments.logger ) && arguments.logger.canWarn() ) {
-					arguments.logger.warn( "No API credentials have been setup for INXMail. Go to email settings to configure INXMail API connection and enable syncing of email events." );
+					arguments.logger.warn( "No API credentials have been setup for InxMail. Go to email settings to configure InxMail API connection and enable syncing of email events." );
 				}
 
 				return false;
