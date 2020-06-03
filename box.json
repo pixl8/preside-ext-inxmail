@@ -2,15 +2,16 @@
     "name":"PresideCMS Extension: INXMail SMTP Provider",
     "type":"preside-extensions",
     "version":"VERSION_NUMBER",
-    "private":true,
-    "author":"Pixl8 Interactive",
+    "location":"https://s3.eu-west-2.amazonaws.com/pixl8-public-packages/inxmail/DOWNLOAD_LOCATION",
+    "private":false,
+    "author":"Pixl8 Group",
     "directory":"application/extensions",
     "repository":{
         "type":"git",
-        "URL":"https://gitlab.pixl8.london/pixl8/extensions/preside-ext-inxmail"
+        "URL":"https://github.com/pixl8/preside-ext-inxmail"
     },
     "slug":"preside-ext-inxmail",
-    "projectURL":"https://gitlab.pixl8.london/pixl8/extensions/preside-ext-inxmail",
+    "projectURL":"https://github.com/pixl8/preside-ext-inxmail",
     "ignore":[
         ".git/*",
         ".gitignore",
