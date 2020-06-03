@@ -69,18 +69,18 @@ component {
 		sendArgs.params = sendArgs.params ?: {};
 
 		if ( Len( Trim( arguments.settings.inxmail_appid ?: "" ) ) )  {
-			sendArgs.params[ "X-inx-correlationId1" ] = Trim( arguments.settings.inxmail_appid );
+			sendArgs.params[ "X-inx-correlationId1" ] = { name="X-inx-correlationId1", value=Trim( arguments.settings.inxmail_appid ) };
 		} else {
 			var appSettings = getApplicationMetadata();
-			sendArgs.params[ "X-inx-correlationId1" ] = appSettings.name ?: "Preside";
+			sendArgs.params[ "X-inx-correlationId1" ] = { name="X-inx-correlationId1", value=appSettings.name ?: "Preside" };
 		}
 
 		if ( Len( Trim( template.name ?: "" ) ) ) {
-			sendArgs.params[ "X-inx-correlationId2" ] = Trim( template.name );
+			sendArgs.params[ "X-inx-correlationId2" ] = { name="X-inx-correlationId2", value=Trim( template.name ) };
 		}
 
 		if ( Len( sendArgs.messageId ?: "" ) ) {
-			sendArgs.params[ "X-inx-correlationId3" ] = sendArgs.messageId;
+			sendArgs.params[ "X-inx-correlationId3" ] = { name="X-inx-correlationId3", value=sendArgs.messageId };
 		}
 	}
 }

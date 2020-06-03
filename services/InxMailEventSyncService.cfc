@@ -87,7 +87,7 @@ component {
 			if ( canInfo ) {
 				if ( reactionCount ) {
 					arguments.logger.info( "Fetched [#reactionCount#] #eventType# records from INXMail, recording in Preside now..." );
-				} else if ( resultparams.page == 0 ) {
+				} else if ( params.page == 0 ) {
 					arguments.logger.info( "No #eventType# events to record." );
 				}
 			}
