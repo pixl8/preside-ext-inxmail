@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.5
+
+* Fix logging of complaints sync
+* Ensure we do not repeatedly fetch the last synced bounce/complaint
+
 ## 1.0.4
 
 * Fix case of InxMail (not INXMail)

@@ -37,7 +37,7 @@ component {
 		);
 	}
 
-	public void function _syncComplaints() {
+	public void function _syncComplaints( any logger ) {
 		_syncReactions(
 			  eventType    = "complaint"
 			, apiUri       = "/relaycomplaints"
@@ -114,7 +114,9 @@ component {
 		var latest = sysConfigDao.selectData( filter={ category="inxmailsync", setting="latest_#arguments.eventType#" }, selectFields=[ "value" ] );
 
 		if ( IsDate( latest.value ?: "" ) ) {
-			return latest.value;
+			var nextDate = DateAdd( 'l', 1, latest.value );
+
+			return DateFormat( nextDate, "yyyy-mm-dd" ) & "T" & TimeFormat( nextDate, "HH:mm:ss.lll" ) & "+0000";
 		}
 
 		return "";
