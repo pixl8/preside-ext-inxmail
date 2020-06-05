@@ -37,7 +37,7 @@ component {
 		);
 	}
 
-	public void function _syncComplaints() {
+	public void function _syncComplaints( any logger ) {
 		_syncReactions(
 			  eventType    = "complaint"
 			, apiUri       = "/relaycomplaints"
