@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.6
+
+* Fix timezone issues with sync from date calculation.
+
 ## 1.0.5
 
 * Fix logging of complaints sync
