@@ -114,9 +114,11 @@ component {
 		var latest = sysConfigDao.selectData( filter={ category="inxmailsync", setting="latest_#arguments.eventType#" }, selectFields=[ "value" ] );
 
 		if ( IsDate( latest.value ?: "" ) ) {
-			var nextDate = DateAdd( 'l', 1, latest.value );
+			var regPattern = "^(.*:)([0-9]{2}\.[0-9]{3})(\+0000)$";
+			var secondsAndMillis = Val( ReReplace( latest.value, regPattern, "\2" ) ) + 0.001;
+			var nextDate = ReReplace( latest.value, regPattern, "\1{secondsAndMillis}\3" );
 
-			return DateFormat( nextDate, "yyyy-mm-dd" ) & "T" & TimeFormat( nextDate, "HH:mm:ss.lll" ) & "+0000";
+			return Replace( nextDate, "{secondsAndMillis}", secondsAndMillis );
 		}
 
 		return "";
