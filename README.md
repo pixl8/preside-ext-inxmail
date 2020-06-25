@@ -4,6 +4,10 @@ The InxMail SMTP provider allows you to use the [InxMail SMTP Relay service](htt
 
 Once installed, the extension will add an InxMail tab to your email settings page. Configure your SMTP credentials and API keys and you are good to go.
 
+## Permissions
+
+The extension adds the following admin permission key: `inxmailBounces.bounces`. This is used to control access to the InxMail blocklist management screens from within the Preside admin. The permission is added to the default Preside `sysadmin` role but _you will need to add the key to any other admin user roles who you wish to have access to this feature_.
+
 ## Recommendations
 
 We recommend that you set the following feature flag in your application's config.cfc if you are using this extension to send mail:
