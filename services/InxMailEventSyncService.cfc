@@ -25,6 +25,71 @@ component {
 		return true;
 	}
 
+	public boolean function syncBlockList( any logger ) {
+		var canLog         = !IsNull( arguments.logger );
+		var canInfo        = canLog && arguments.logger.canInfo();
+		var result         = "";
+		var blockList      = "";
+		var blockListCount = "";
+		var params      = {
+			  page = 0
+			, size = 200
+		};
+		var syncJob = CreateUUId();
+		var dao     = $getPresideObject( "inxmail_blocked_email" );
+
+		if ( canInfo ) {
+			arguments.logger.info( "Syncing InxMail block list..." );
+		}
+
+		do {
+			result = inxMailApiWrapper.call(
+				  uri    = "/blocklist"
+				, params = params
+			);
+			blockList = result._embedded.blockList ?: [];
+			blockListCount = ArrayLen( blockList );
+			if ( canInfo ) {
+				if ( blockListCount ) {
+					arguments.logger.info( "Fetched [#blockListCount#] block list records from InxMail, recording in Preside now..." );
+				} else if ( params.page == 0 ) {
+					arguments.logger.info( "No blocked emails to record." );
+				}
+			}
+			for( var blockedEmail in blockList ) {
+				var updated = dao.updateData( filter={ email_address=blockedEmail.email }, data={
+					  block_date   = blockedEmail.blockDate
+					, block_reason = blockedEmail.blockType
+					, sync_job     = syncJob
+				} );
+				if ( !updated ) {
+					dao.insertData( data={
+						  email_address = blockedEmail.email
+						, block_date    = blockedEmail.blockDate
+						, block_reason  = blockedEmail.blockType
+						, sync_job      = syncJob
+					} );
+				}
+			}
+		} while( ++params.page <= Val( result.page.totalPages ?: "" ) );
+
+		var removedEntries = dao.deleteData( filter="sync_job != :sync_job", filterParams={ sync_job=syncJob } );
+		if ( canInfo ) {
+			if ( removedEntries ) {
+				arguments.logger.info( "Removed [#NumberFormat( removedEntries )#] blocked emails from local list - no longer found in INXMail block list." );
+			} else {
+				arguments.logger.info( "Checked for local blocked emails that are no longer blocked in INXMail. None were found and no action was taken." );
+
+			}
+		}
+
+		if ( canInfo ) {
+			arguments.logger.info( "Finished syncing InxMail blocklist." );
+		}
+
+		return true;
+	}
+
 // PRIVATE HELPERS
 	public void function _syncBounces( any logger ) {
 		_syncReactions(
@@ -56,13 +121,13 @@ component {
 		, required any    process
 		,          any    logger
 	) {
-		var canLog      = !IsNull( arguments.logger );
-		var canInfo     = canLog && arguments.logger.canInfo();
-		var lastSuccess = _getLatestSuccess( arguments.eventType );
-		var result      = "";
-		var bounces     = [];
-		var bounceCount = 0;
-		var params      = {
+		var canLog        = !IsNull( arguments.logger );
+		var canInfo       = canLog && arguments.logger.canInfo();
+		var lastSuccess   = _getLatestSuccess( arguments.eventType );
+		var result        = "";
+		var reactions     = [];
+		var reactionCount = 0;
+		var params        = {
 			  correlationId1 = _getAppId()
 			, page           = 0
 			, size           = 50

@@ -14,4 +14,16 @@ component {
 		return inxMailEventSyncService.syncDeliveryNotifications( arguments.logger ?: NullValue() );
 	}
 
+	/**
+	 * Sync InxMail block list
+	 *
+	 * @priority     5
+	 * @schedule     0 0 *\/2 * * *
+	 * @displayName  Sync InxMail block list
+	 * @displayGroup Email
+	 */
+	private boolean function syncInxMailBlockList( logger ) {
+		return inxMailEventSyncService.syncBlockList( arguments.logger ?: NullValue() );
+	}
+
 }
