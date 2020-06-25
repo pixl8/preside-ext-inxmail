@@ -3,7 +3,8 @@
  *
  */
 component {
-	property name="emailTemplateService" inject="emailTemplateService";
+	property name="emailTemplateService"    inject="emailTemplateService";
+	property name="inxMailBlockListService" inject="inxMailBlockListService";
 
 	private boolean function send( struct sendArgs={}, struct settings={} ) {
 		var template = emailTemplateService.getTemplate( sendArgs.template ?: "" );
@@ -15,6 +16,7 @@ component {
 			, use_tls  = true
 		};
 
+		_checkBlockList( argumentCollection=arguments );
 		_addInxHeaders( argumentCollection=arguments );
 
 		return runEvent(
@@ -65,6 +67,16 @@ component {
 	}
 
 // HELPERS
+	private void function _checkBlockList( struct sendArgs={}, struct settings={} ) {
+		var originalTo = ArrayToList( sendArgs.to ?: [] );
+
+		sendArgs.to = inxMailBlockListService.removeBlockedEmailsFromSendList( sendArgs.to ?: [] );
+
+		if ( !ArrayLen( sendArgs.to ) ) {
+			throw( "The email address, [#originalTo#], was found in the INXMail block list and we have prevented sending to them.", "inxmail.block.list" );
+		}
+	}
+
 	private void function _addInxHeaders( struct sendArgs={}, struct settings={} ) {
 		sendArgs.params = sendArgs.params ?: {};
 
