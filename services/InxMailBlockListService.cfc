@@ -4,6 +4,8 @@
  */
 component {
 
+	property name="inxMailApiWrapper"   inject="inxMailApiWrapper";
+
 // CONSTRUCTOR
 	public any function init() {
 		return this;
@@ -23,6 +25,17 @@ component {
 		}
 
 		return cleanList;
+	}
+
+	public boolean function unblockEmail( required string emailAddress ) {
+		inxMailApiWrapper.call(
+			  uri    = "/blocklist/#arguments.emailAddress#"
+			, method = "DELETE"
+		);
+
+		$getPresideObject( "inxmail_blocked_email" ).deleteData( filter={ email_address=arguments.emailAddress } );
+
+		return true;
 	}
 
 // PRIVATE HELPERS
