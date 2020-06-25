@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0
+
+* Add support for INXMail block lists
+
 ## 1.0.6
 
 * Fix timezone issues with sync from date calculation.
