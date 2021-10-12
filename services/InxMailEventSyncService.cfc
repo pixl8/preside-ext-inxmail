@@ -134,7 +134,7 @@ component {
 		};
 
 		if ( IsDate( lastSuccess ) ) {
-			params.begin = lastSuccess;
+			params.begin = ReReplace( lastSuccess, "\+0000$", "Z" ); // changed format for the BEGIN param
 			if ( canInfo ) {
 				arguments.logger.info( "Syncing InxMail #eventType# events since [#lastSuccess#]..." );
 			}
