@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+* [#1](https://github.com/pixl8/preside-ext-inxmail/issues/1): Fix for API parameter format change in INXMail
+
 ## 1.1.0
 
 * Add support for INXMail block lists
