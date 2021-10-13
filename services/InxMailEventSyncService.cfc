@@ -180,7 +180,7 @@ component {
 
 		if ( IsDate( latest.value ?: "" ) ) {
 			var regPattern = "^(.*:)([0-9]{2}\.[0-9]{3})(\+0000)$";
-			var secondsAndMillis = Val( ReReplace( latest.value, regPattern, "\2" ) ) + 0.001;
+			var secondsAndMillis = NumberFormat( Val( ReReplace( latest.value, regPattern, "\2" ) ) + 0.001, "0.000" );
 			var nextDate = ReReplace( latest.value, regPattern, "\1{secondsAndMillis}\3" );
 
 			return Replace( nextDate, "{secondsAndMillis}", secondsAndMillis );
