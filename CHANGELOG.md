@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.1
+## 1.1.2
 
 * [#1](https://github.com/pixl8/preside-ext-inxmail/issues/1): Fix for API parameter format change in INXMail
 
